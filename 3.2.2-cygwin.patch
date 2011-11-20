@@ -1,0 +1,91 @@
+--- origsrc/evolution-ews-3.2.2/configure.ac	2011-11-14 03:04:55.000000000 -0600
++++ src/evolution-ews-3.2.2/configure.ac	2011-11-18 15:21:59.073195400 -0600
+@@ -44,17 +44,29 @@ dnl ******************************
+ dnl Check for Win32
+ dnl ******************************
+ 
++AC_CANONICAL_HOST
+ AC_MSG_CHECKING([for Win32])
+ case "$host" in
++*-cygwin*)
++	os_win32=no
++	NO_UNDEFINED='-no-undefined'
++	SOCKET_LIBS=''
++	SOPFX='cyg'
++	SOEXT='.dll'
++	;;
+ *-mingw*)
+ 	os_win32=yes
+ 	NO_UNDEFINED='-no-undefined'
+ 	SOCKET_LIBS='-lws2_32'
++	SOPFX='lib'
++	SOEXT='.dll'
+ 	;;
+ *)
+ 	os_win32=no
+ 	NO_UNDEFINED='-no-undefined'
+ 	SOCKET_LIBS=''
++	SOPFX='lib'
++	SOEXT='.so'
+ 	;;
+ esac
+ 
+@@ -62,6 +74,8 @@ AC_MSG_RESULT([$os_win32])
+ AM_CONDITIONAL(OS_WIN32, [test "x$os_win32" = "xyes"])
+ AC_SUBST(NO_UNDEFINED)
+ AC_SUBST(SOCKET_LIBS)
++AC_SUBST(SOPFX)
++AC_SUBST(SOEXT)
+ 
+ dnl ***********************
+ dnl Compiler Warning Flags
+@@ -83,7 +97,7 @@ AS_COMPILER_FLAGS(WARNING_FLAGS,
+ 	-Wformat-nonliteral -Wformat-security -Winit-self
+ 	-Wmissing-declarations -Wmissing-include-dirs
+ 	-Wmissing-noreturn -Wnested-externs -Wpointer-arith
+-	-Wundef -Wwrite-strings -Werror")
++	-Wundef -Wwrite-strings")
+ AC_SUBST(WARNING_FLAGS)
+ 
+ dnl Other useful compiler warnings for test builds only.
+@@ -155,6 +169,11 @@ dnl ****************************
+ PKG_CHECK_MODULES(EVOLUTION_PLUGIN, evolution-plugin-3.0 >= evo_minimum_version)
+ 
+ dnl ****************************
++dnl Check for evolution mail
++dnl ****************************
++PKG_CHECK_MODULES(EVOLUTION_MAIL, evolution-mail-3.0 >= evo_minimum_version)
++
++dnl ****************************
+ dnl Check for evolution shell 
+ dnl ****************************
+ PKG_CHECK_MODULES(EVOLUTION_SHELL, evolution-shell-3.0 >= evo_minimum_version)
+--- origsrc/evolution-ews-3.2.2/src/account-setup-eplugin/Makefile.am	2011-09-08 03:28:33.000000000 -0500
++++ src/evolution-ews-3.2.2/src/account-setup-eplugin/Makefile.am	2011-11-18 14:45:06.559646800 -0600
+@@ -9,6 +9,7 @@ AM_CPPFLAGS = -I .					\
+ 
+ %.eplug: %.eplug.in
+ 	sed -e 's|\@PLUGINDIR\@|$(plugindir)|'		\
++	-e 's|\@SOPFX\@|$(SOPFX)|'			\
+ 	-e 's|\@SOEXT\@|$(SOEXT)|'			\
+ 	-e 's|\@GETTEXT_PACKAGE\@|$(GETTEXT_PACKAGE)|'	\
+ 	-e 's|\@LOCALEDIR\@|$(localedir)|' $< > $@
+@@ -35,6 +36,7 @@ liborg_gnome_exchange_ews_la_LIBADD =
+ 	$(top_builddir)/src/server/libeews-1.2.la	\
+ 	$(top_builddir)/src/utils/libewsutils.la 	\
+ 	$(top_builddir)/src/camel/libcamelews.la 	\
++	$(EVOLUTION_MAIL_LIBS)				\
+ 	$(EVOLUTION_PLUGIN_LIBS)			\
+ 	$(EVOLUTION_SHELL_LIBS) \
+ 	$(CAMEL_LIBS) 					\
+--- origsrc/evolution-ews-3.2.2/src/account-setup-eplugin/org-gnome-exchange-ews.eplug.xml	2011-08-08 01:47:16.000000000 -0500
++++ src/evolution-ews-3.2.2/src/account-setup-eplugin/org-gnome-exchange-ews.eplug.xml	2011-11-18 14:46:06.029048300 -0600
+@@ -2,7 +2,7 @@
+ <e-plugin-list>
+   <e-plugin
+     type="shlib"
+-    location="@PLUGINDIR@/liborg-gnome-exchange-ews.so"
++    location="@PLUGINDIR@/@SOPFX@org-gnome-exchange-ews@SOEXT@"
+     load-on-startup="true"
+     id="org.gnome.evolution.plugin.exchange-ews"
+     _name="Exchange Web Services"

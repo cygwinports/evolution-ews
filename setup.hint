@@ -1,0 +1,5 @@
+category: Gnome Mail
+requires: evolution libcamel1.2_29 libebook1.2_12 libecal1.2_10 libedata-book1.2_11 libedata-cal1.2_13 libedataserver1.2_15 libedataserverui3.0_1 libgconf2_4 libglib2.0_0 libgtk3_0 libical0 libintl8 libsoup2.4_1 libsqlite3_0 libxml2
+sdesc: "Evolution Exchange Web Services connector"
+ldesc: "This package enables Evolution support for Exchange Web Services 
+is the SOAP-based protocol that obsoletes MAPI, as of Exchange 2007."
