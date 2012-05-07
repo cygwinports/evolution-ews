@@ -2,3 +2,5 @@ inherit gnome2
 
 
 PATCH_URI="3.2.2-cygwin.patch"
+
+KEEP_LA_FILES="none"
