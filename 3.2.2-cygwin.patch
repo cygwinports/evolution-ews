@@ -66,7 +66,7 @@
  	$(top_builddir)/src/utils/libewsutils.la 	\
  	$(top_builddir)/src/camel/libcamelews.la 	\
 +	$(EVOLUTION_MAIL_LIBS)				\
-+	-lewidgets					\
++	-lemiscwidgets					\
  	$(EVOLUTION_PLUGIN_LIBS)			\
  	$(EVOLUTION_SHELL_LIBS) \
  	$(CAMEL_LIBS) 					\
