@@ -1,0 +1,12 @@
+inherit gnome2
+
+CATEGORY="Gnome Mail"
+SUMMARY="Evolution Exchange Web Services connector"
+DESCRIPTION="This package enables Evolution support for Exchange Web Services
+is the SOAP-based protocol that obsoletes MAPI, as of Exchange 2007."
+
+PATCH_URI="3.2.2-cygwin.patch"
+
+DEPS_PATH="/usr/lib/evolution-data-server/camel-providers"
+
+KEEP_LA_FILES="none"
