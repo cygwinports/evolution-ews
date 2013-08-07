@@ -64,11 +64,14 @@
  	$(top_builddir)/src/server/libeews-1.2.la  \
 --- origsrc/evolution-ews-3.6.1/src/configuration/Makefile.am	2012-09-16 10:06:03.000000000 -0500
 +++ src/evolution-ews-3.6.1/src/configuration/Makefile.am	2012-12-20 03:35:13.624461800 -0600
-@@ -46,6 +46,7 @@ module_ews_configuration_la_SOURCES = \
+@@ -46,8 +46,10 @@ module_ews_configuration_la_SOURCES = \
  module_ews_configuration_la_LIBADD = \
  	$(top_builddir)/src/server/libeews-1.2.la \
  	$(top_builddir)/src/utils/libewsutils.la \
 +	$(top_builddir)/src/camel/libcamelews.la \
  	$(EVOLUTION_MAIL_LIBS) \
  	$(EVOLUTION_SHELL_LIBS) \
++	$(LIBBOOK_LIBS) \
  	$(NULL)
+ 
+ module_ews_configuration_la_LDFLAGS = \
