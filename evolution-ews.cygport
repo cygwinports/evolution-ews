@@ -1,7 +1,7 @@
 inherit gnome2
 
 NAME="evolution-ews"
-VERSION=3.10.4
+VERSION=3.12.10
 RELEASE=1
 CATEGORY="GNOME Mail"
 SUMMARY="Evolution Exchange Web Services connector"
@@ -9,8 +9,8 @@ DESCRIPTION="This package enables Evolution support for Exchange Web Services
 is the SOAP-based protocol that obsoletes MAPI, as of Exchange 2007."
 
 PATCH_URI="
-	3.6.1-cygwin.patch
-	3.10.4-automake.patch
+	3.12.10-libebook.patch
+	3.12.10-cygwin.patch
 "
 
 CYGCONF_ARGS="--with-krb5=/usr"

@@ -1,0 +1,21 @@
+--- origsrc/evolution-ews-3.12.10/configure.ac	2014-12-08 00:29:12.000000000 -0600
++++ src/evolution-ews-3.12.10/configure.ac	2015-01-12 18:14:03.252687200 -0600
+@@ -222,7 +222,7 @@ PKG_CHECK_MODULES(LIBEDATASERVER, libeda
+ PKG_CHECK_MODULES(LIBEBACKEND, libebackend-1.2 >= eds_minimum_version)
+ PKG_CHECK_MODULES(LIBECAL, libecal-1.2 >= eds_minimum_version)
+ PKG_CHECK_MODULES(LIBEDATACAL, libedata-cal-1.2 >= eds_minimum_version)
+-PKG_CHECK_MODULES(LIBBOOK, libebook-1.2 >= eds_minimum_version)
++PKG_CHECK_MODULES(LIBEBOOK, libebook-1.2 >= eds_minimum_version)
+ PKG_CHECK_MODULES(LIBEDATABOOK, libedata-book-1.2 >= eds_minimum_version)
+ PKG_CHECK_MODULES(LIBEMAIL_ENGINE, libemail-engine >= eds_minimum_version)
+ PKG_CHECK_MODULES(CAMEL, camel-1.2 >= eds_minimum_version)
+--- origsrc/evolution-ews-3.12.10/src/configuration/Makefile.am	2014-07-10 06:20:44.000000000 -0500
++++ src/evolution-ews-3.12.10/src/configuration/Makefile.am	2015-01-12 18:10:02.352096700 -0600
+@@ -54,6 +54,7 @@ module_ews_configuration_la_LIBADD = \
+ 	$(top_builddir)/src/utils/libewsutils.la \
+ 	$(EVOLUTION_MAIL_LIBS) \
+ 	$(EVOLUTION_SHELL_LIBS) \
++	$(LIBEBOOK_LIBS) \
+ 	$(LIBECAL_LIBS) \
+ 	$(NULL)
+ 

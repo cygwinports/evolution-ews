@@ -1,0 +1,41 @@
+--- origsrc/evolution-ews-3.12.10/configure.ac	2014-12-08 00:29:12.000000000 -0600
++++ src/evolution-ews-3.12.10/configure.ac	2015-01-12 17:51:36.037612600 -0600
+@@ -88,17 +88,29 @@ dnl ******************************
+ dnl Check for Win32
+ dnl ******************************
+ 
++AC_CANONICAL_HOST
+ AC_MSG_CHECKING([for Win32])
+ case "$host" in
++*-cygwin*)
++	os_win32=no
++	NO_UNDEFINED='-no-undefined'
++	SOCKET_LIBS=''
++	SOPFX='cyg'
++	SOEXT='.dll'
++	;;
+ *-mingw*)
+ 	os_win32=yes
+ 	NO_UNDEFINED='-no-undefined'
+ 	SOCKET_LIBS='-lws2_32'
++	SOPFX='lib'
++	SOEXT='.dll'
+ 	;;
+ *)
+ 	os_win32=no
+ 	NO_UNDEFINED='-no-undefined'
+ 	SOCKET_LIBS=''
++	SOPFX='lib'
++	SOEXT='.so'
+ 	;;
+ esac
+ 
+@@ -106,6 +118,8 @@ AC_MSG_RESULT([$os_win32])
+ AM_CONDITIONAL(OS_WIN32, [test "x$os_win32" = "xyes"])
+ AC_SUBST(NO_UNDEFINED)
+ AC_SUBST(SOCKET_LIBS)
++AC_SUBST(SOPFX)
++AC_SUBST(SOEXT)
+ 
+ AC_CHECK_LIBM
+ AC_SUBST(LIBM)
