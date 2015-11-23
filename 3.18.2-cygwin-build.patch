@@ -1,0 +1,14 @@
+--- origsrc/evolution-ews-3.18.2/src/camel/Makefile.am	2015-03-23 02:28:34.000000000 -0500
++++ src/evolution-ews-3.18.2/src/camel/Makefile.am	2015-11-22 19:45:58.464618500 -0600
+@@ -1,10 +1,6 @@
+ NULL =
+ 
+-if OS_WIN32
+-lib_LTLIBRARIES = libcamelews-priv.la
+-else
+-noinst_LTLIBRARIES = libcamelews-priv.la
+-endif
++privlib_LTLIBRARIES = libcamelews-priv.la
+ 
+ ENUM_TYPES = camel-ews-enums.h
+ 

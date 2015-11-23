@@ -1,0 +1,14 @@
+--- origsrc/evolution-ews-3.18.2/src/addressbook/e-book-backend-ews.c	2015-09-21 04:59:31.000000000 -0500
++++ src/evolution-ews-3.18.2/src/addressbook/e-book-backend-ews.c	2015-11-22 15:23:39.205094000 -0600
+@@ -4349,9 +4349,9 @@ e_book_backend_ews_get_direct_book (EBoo
+ 
+ 	/* Support in-tree testing / relocated modules */
+ 	if (modules_env)
+-		backend_path = g_build_filename (modules_env, "libebookbackendews.so", NULL);
++		backend_path = g_module_build_path (modules_env, "ebookbackendews");
+ 	else
+-		backend_path = g_build_filename (BACKENDDIR, "libebookbackendews.so", NULL);
++		backend_path = g_module_build_path (BACKENDDIR, "ebookbackendews");
+ 	direct = e_data_book_direct_new (backend_path, "EBookBackendEwsFactory", dirname);
+ 
+ 	g_free (backend_path);
