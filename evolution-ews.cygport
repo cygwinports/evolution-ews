@@ -2,7 +2,7 @@ inherit gnome2
 
 NAME="evolution-ews"
 VERSION=3.20.5
-RELEASE=1
+RELEASE=2
 CATEGORY="GNOME Mail"
 SUMMARY="Evolution Exchange Web Services connector"
 DESCRIPTION="This package enables Evolution support for Exchange Web Services
